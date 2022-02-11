@@ -112,26 +112,42 @@ resource "aws_network_interface" "acqa-test-networkinterface1" {
 # Get the userID for s3 bucket
 data "aws_canonical_user_id" "current_user" {}
 
+# Get the userID for s3 bucket
+data "aws_canonical_user_id" "current_user" {}
+
 # Create S3 bucket
 resource "aws_s3_bucket" "acqa-test-s3bucket1" {
   bucket = "acqa-test-s3bucket1"
-
-  grant {
-    id          = data.aws_canonical_user_id.current_user.id
-    type        = "CanonicalUser"
-    permissions = ["FULL_CONTROL"]
-  }
-
-  grant {
-    type        = "Group"
-    permissions = ["READ", "WRITE"]
-    uri         = "http://acs.amazonaws.com/groups/s3/LogDelivery"
-  }
-
   tags = {
     Name = format("%s-s3bucket1", var.acqaPrefix)
     ACQAResource = "true"
     Owner = "ACQA"
+  }
+}
+
+# Create acl resource to grant permissions on bucket
+resource "aws_s3_bucket_acl" "acqa-test-s3bucketAcl" {
+  bucket = aws_s3_bucket.acqa-test-s3bucket1.id
+  access_control_policy {
+    grant {
+      grantee {
+        id   = data.aws_canonical_user_id.current_user.id
+        type = "CanonicalUser"
+      }
+      permission = "FULL_CONTROL"
+    }
+
+    grant {
+      grantee {
+        type = "Group"
+        uri  = "http://acs.amazonaws.com/groups/s3/LogDelivery"
+      }
+      permission = "READ_ACP"
+    }
+
+    owner {
+      id = data.aws_canonical_user_id.current_user.id
+    }
   }
 }
 
