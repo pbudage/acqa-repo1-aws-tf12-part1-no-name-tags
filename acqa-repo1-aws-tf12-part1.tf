@@ -112,9 +112,6 @@ resource "aws_network_interface" "acqa-test-networkinterface1" {
 # Get the userID for s3 bucket
 data "aws_canonical_user_id" "current_user" {}
 
-# Get the userID for s3 bucket
-data "aws_canonical_user_id" "current_user" {}
-
 # Create S3 bucket
 resource "aws_s3_bucket" "acqa-test-s3bucket1" {
   bucket = "acqa-test-s3bucket1"
