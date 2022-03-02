@@ -29,7 +29,7 @@ resource "aws_security_group" "acqa-test-securitygroup1" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["10.0.0.0/24"]
+    cidr_blocks = ["0.0.0.0/24"]
   }
   ingress {
     from_port   = 9020
