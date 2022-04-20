@@ -9,7 +9,7 @@ resource "aws_vpc" "acqa-test-vpc1" {
     Name = format("%s-vpc1", var.acqaPrefix)
     ACQAResource = "true"
     Owner = "ACQA"
-    Drift = "Test"
+    
   }
 }
 
