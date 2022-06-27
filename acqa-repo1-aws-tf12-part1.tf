@@ -1,27 +1,13 @@
 provider "aws" {
-  region = "us-east-1"
-#  skip_credentials_validation = true
-#  skip_requesting_account_id  = true
-#  access_key                  = "mock_access_key"
-#  secret_key                  = "mock_secret_key"
+  region = "ca-central-1"
+
 }
 
-# # Create a VPC to launch our instances into
-# resource "aws_vpc" "tcs-qe-vpc1" {
-#   cidr_block = "10.0.0.0/16"
-#   tags = {
-#     Name = format("%s-vpc1", var.acqaPrefix)
-#     TcsQEResource = "true"
-#     Owner = "ACQA"
-#     Drift = "Test"
-#   }
-# }
-
 # Create a security group with most of the vulnerabilities
-resource "aws_security_group" "tcs-qe-sg1-withoutnametag" {
-  name        = "tcs-qe-sg1-withoutnametag"
+resource "aws_security_group" "tcs-qe-sg1-withoutnametag-5362" {
+  name        = "tcs-qe-sg1-withoutnametag-5362"
   description = "This security group is for API test automation"
-  vpc_id      = "vpc-0b9a8f63a00fe47cc"
+  vpc_id      = "vpc-0dcfc6c7488b848c7"
 
   tags = {
     TcsQEResource = "true"
@@ -36,10 +22,10 @@ resource "aws_security_group" "tcs-qe-sg1-withoutnametag" {
   }
 }
 
-resource "aws_security_group" "tcs-qe-sg2-withoutnametag" {
+resource "aws_security_group" "tcs-qe-sg2-withoutnametag-5362" {
   name        = "tcs-qe-sg2-withoutnametag"
   description = "This security group is for API test automation"
-  vpc_id      = "vpc-0b9a8f63a00fe47cc"
+  vpc_id      = "vpc-0dcfc6c7488b848c7"
 
   tags = {
     TcsQEResource = "true"
@@ -55,29 +41,29 @@ resource "aws_security_group" "tcs-qe-sg2-withoutnametag" {
 }
 
 # Create S3 bucket
-resource "aws_s3_bucket" "tcs-qe-s3-bucket1-withoutnametag" {
-  bucket = "tcs-qe-s3-bucket1-withoutnametag"
+resource "aws_s3_bucket" "tcs-qe-s3-bucket1-withoutnametag-5362" {
+  bucket = "tcs-qe-s3-bucket1-withoutnametag-5362"
   tags = {
     TcsQEResource = "true"
   }
 }
 
 # Create acl resource to grant permissions on bucket
-resource "aws_s3_bucket_acl" "tcs-qe-s3-bucket1-acl" {
-  bucket = aws_s3_bucket.tcs-qe-s3-bucket1-withoutnametag.id
+resource "aws_s3_bucket_acl" "tcs-qe-s3-bucket1-acl-5362" {
+  bucket = aws_s3_bucket.tcs-qe-s3-bucket1-withoutnametag-5362.id
   acl    = "private"
 }
 
 # Create S3 bucket
-resource "aws_s3_bucket" "tcs-qe-s3-bucket2-withoutnametag" {
-  bucket = "tcs-qe-s3-bucket2-withoutnametag"
+resource "aws_s3_bucket" "tcs-qe-s3-bucket2-withoutnametag-5362" {
+  bucket = "tcs-qe-s3-bucket2-withoutnametag-5362"
   tags = {
     TcsQEResource = "true"
   }
 }
 
 # Create acl resource to grant permissions on bucket
-resource "aws_s3_bucket_acl" "tcs-qe-s3-bucket2-acl" {
-  bucket = aws_s3_bucket.tcs-qe-s3-bucket2-withoutnametag.id
+resource "aws_s3_bucket_acl" "tcs-qe-s3-bucket2-acl-5362" {
+  bucket = aws_s3_bucket.tcs-qe-s3-bucket2-withoutnametag-5362.id
   acl    = "private"
 }
