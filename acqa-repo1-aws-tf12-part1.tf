@@ -48,6 +48,7 @@ resource "aws_s3_bucket" "tcs-qe-s3-bucket1-withoutnametag-5362" {
   bucket = "tcs-qe-s3-bucket1-withoutnametag-5362"
   tags = {
     TcsQEResource = "true"
+    Testing = "testingiacdrift"
   }
 }
 
